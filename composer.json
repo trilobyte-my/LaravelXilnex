@@ -1,0 +1,23 @@
+{
+    "name": "trilobyte-my/laravel-xilnex",
+    "description": "Xilnex API for Laravel",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Trilobyte\\Xilnex\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/",
+            "Trilobyte\\Xilnex\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Eric",
+            "email": "erickk89@gmail.com"
+        }
+    ],
+    "require": {}
+}
