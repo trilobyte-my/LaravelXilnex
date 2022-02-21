@@ -31,7 +31,16 @@ class ClientApi
 
         $realBody = [];
         $realBody['client'] = (array)$body;
-
         return $this->core->post($url, $realBody);
+    }
+
+    public function update($id, CreateUserBody $body)
+    {
+        $url = "clients/$id";
+
+        $realBody = [];
+        $realBody['client'] = (array)$body;
+
+        return $this->core->put($url, $realBody);
     }
 }

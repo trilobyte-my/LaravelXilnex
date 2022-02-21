@@ -47,6 +47,11 @@ abstract class XilnexCore
         return $this->send("POST", $path, $payload);
     }
 
+    public function put($path, $payload = null)
+    {
+        return $this->send("PUT", $path, $payload);
+    }
+
     public function get($path, $payload = null)
     {
         return $this->send("GET", $path, $payload);
@@ -74,8 +79,12 @@ abstract class XilnexCore
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers());
-        if ($method == "POST") {
+        if ($method == "POST" || $method = "PUT") {
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
+
+            if ($method == "PUT") {
+                curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
+            }
         }
 
         $response = curl_exec($ch);

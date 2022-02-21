@@ -56,27 +56,51 @@ class ApiTest extends TestCase
     //     }
     // }
 
-    public function testSalesSearch()
-    {
-        try {
-            $payload = new SalesSearchPayload();
-            $payload->status = "Completed";
-            $payload->clientid = "4017646";
-            $payload->datefrom = Carbon::today()->format('Y-m-d\TH:i:s.v\Z');
-            $payload->dateto = Carbon::today()->endOfDay()->format('Y-m-d\TH:i:s.v\Z');
-            $output = $this->api->getSales()->bySearch($payload);
-            print_r($output);
+    // public function testSalesSearch()
+    // {
+    //     try {
+    //         $payload = new SalesSearchPayload();
+    //         $payload->status = "Completed";
+    //         $payload->clientid = "4017646";
+    //         $payload->datefrom = Carbon::today()->format('Y-m-d\TH:i:s.v\Z');
+    //         $payload->dateto = Carbon::today()->endOfDay()->format('Y-m-d\TH:i:s.v\Z');
+    //         $output = $this->api->getSales()->bySearch($payload);
+    //         print_r($output);
 
-            $this->assertTrue(true);
-        } catch (\Exception $e) {
-            $output = $e->getMessage();
-            print_r($output);
-        }
-    }
+    //         $this->assertTrue(true);
+    //     } catch (\Exception $e) {
+    //         $output = $e->getMessage();
+    //         print_r($output);
+    //     }
+    // }
 
     // public function testCreateClient()
     // {
     //     try {
+    //         $body = new CreateUserBody();
+    //         $body->name = "Test";
+    //         $body->email = "test@test.com";
+    //         $body->type = "FREE"; //Fixed
+    //         $body->group = "Retail"; //Fixed
+    //         // $body->gender = "male";
+    //         // $body->dob = Carbon::createFromFormat("Y-m-d", "1989-02-13")->format('Y-m-d\TH:i:s.v\Z');
+    //         $body->mobile = "60177777777";
+    //         $body->category = "Personal"; //Fixed
+    //         $body->createdOutlet = "E-Commerce"; //Fixed
+
+    //         $output = $this->api->getClient()->create($body);
+    //         print_r($output);
+    //         $this->assertTrue(true);
+    //     } catch (\Exception $e) {
+    //         $output = $e->getMessage();
+    //         print_r($output);
+    //     }
+    // }
+
+    // public function testUpdateClient()
+    // {
+    //     try {
+    //         //Must resend all or else will get replace with empty value
     //         $body = new CreateUserBody();
     //         $body->name = "Test";
     //         $body->email = "test@test.com";
@@ -88,7 +112,10 @@ class ApiTest extends TestCase
     //         $body->category = "Personal"; //Fixed
     //         $body->createdOutlet = "E-Commerce"; //Fixed
 
-    //         $output = $this->api->getClient()->create($body);
+    //         //Update Only
+    //         $body->enableDOB = true;
+
+    //         $output = $this->api->getClient()->update(9009, $body);
     //         print_r($output);
     //         $this->assertTrue(true);
     //     } catch (\Exception $e) {
