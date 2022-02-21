@@ -48,8 +48,8 @@ $body->createdOutlet = "E-Commerce"; //Fixed
 
 $output = $this->api->getClient()->create($body);
 ```
+## Sales
 
-##Sales
 ```
 //Search Sales
 $payload = new SalesSearchPayload();
