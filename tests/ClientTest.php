@@ -2,11 +2,14 @@
 
 namespace Tests\Feature;
 
+use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Trilobyte\Xilnex\Clients\ClientApi;
 use Trilobyte\Xilnex\Clients\ClientQueryPayload;
+use Trilobyte\Xilnex\Clients\CreateUserBody;
+use Trilobyte\Xilnex\Sales\SalesSearchPayload;
 use Trilobyte\Xilnex\XilnexApi;
 
 class ApiTest extends TestCase
@@ -25,12 +28,43 @@ class ApiTest extends TestCase
      *
      * @return void
      */
-    public function testByQuery()
+    // public function testByQuery()
+    // {
+    //     $payload = new ClientQueryPayload();
+    //     $payload->email = "dionneteh@yahoo.com";
+    //     try {
+    //         $output = $this->api->getClient()->byQuery($payload);
+    //         print_r($output);
+
+    //         $this->assertTrue(true);
+    //     } catch (\Exception $e) {
+    //         $output = $e->getMessage();
+    //         print_r($output);
+    //     }
+    // }
+
+    // public function testById()
+    // {
+    //     try {
+    //         $output = $this->api->getClient()->byId(4017646);
+    //         print_r($output);
+
+    //         $this->assertTrue(true);
+    //     } catch (\Exception $e) {
+    //         $output = $e->getMessage();
+    //         print_r($output);
+    //     }
+    // }
+
+    public function testSalesSearch()
     {
-        $payload = new ClientQueryPayload();
-        $payload->email = "dionneteh@yahoo.com";
         try {
-            $output = $this->api->getClient()->byQuery($payload);
+            $payload = new SalesSearchPayload();
+            $payload->status = "Completed";
+            $payload->clientid = "4017646";
+            $payload->datefrom = Carbon::today()->format('Y-m-d\TH:i:s.v\Z');
+            $payload->dateto = Carbon::today()->endOfDay()->format('Y-m-d\TH:i:s.v\Z');
+            $output = $this->api->getSales()->bySearch($payload);
             print_r($output);
 
             $this->assertTrue(true);
@@ -40,16 +74,26 @@ class ApiTest extends TestCase
         }
     }
 
-    public function testById()
-    {
-        try {
-            $output = $this->api->getClient()->byId(101);
-            print_r($output);
+    // public function testCreateClient()
+    // {
+    //     try {
+    //         $body = new CreateUserBody();
+    //         $body->name = "Test";
+    //         $body->email = "test@test.com";
+    //         $body->type = "FREE"; //Fixed
+    //         $body->group = "Retail"; //Fixed
+    //         $body->gender = "male";
+    //         $body->dob = Carbon::createFromFormat("Y-m-d", "1989-02-13")->format('Y-m-d\TH:i:s.v\Z');
+    //         $body->mobile = "60177777777";
+    //         $body->category = "Personal"; //Fixed
+    //         $body->createdOutlet = "E-Commerce"; //Fixed
 
-            $this->assertTrue(true);
-        } catch (\Exception $e) {
-            $output = $e->getMessage();
-            print_r($output);
-        }
-    }
+    //         $output = $this->api->getClient()->create($body);
+    //         print_r($output);
+    //         $this->assertTrue(true);
+    //     } catch (\Exception $e) {
+    //         $output = $e->getMessage();
+    //         print_r($output);
+    //     }
+    // }
 }

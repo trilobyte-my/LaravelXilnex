@@ -24,4 +24,14 @@ class ClientApi
         $url = "clients/$id";
         return $this->core->get($url);
     }
+
+    public function create(CreateUserBody $body)
+    {
+        $url = "clients";
+
+        $realBody = [];
+        $realBody['client'] = (array)$body;
+
+        return $this->core->post($url, $realBody);
+    }
 }
