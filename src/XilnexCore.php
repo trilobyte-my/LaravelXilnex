@@ -79,7 +79,7 @@ abstract class XilnexCore
         $ch = curl_init($url);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_HTTPHEADER, $this->headers());
-        if ($method == "POST" || $method = "PUT") {
+        if ($method == "POST" || $method == "PUT") {
             curl_setopt($ch, CURLOPT_POSTFIELDS, json_encode($payload));
 
             if ($method == "PUT") {

@@ -56,23 +56,22 @@ class ApiTest extends TestCase
     //     }
     // }
 
-    // public function testSalesSearch()
-    // {
-    //     try {
-    //         $payload = new SalesSearchPayload();
-    //         $payload->status = "Completed";
-    //         $payload->clientid = "4017646";
-    //         $payload->datefrom = Carbon::today()->format('Y-m-d\TH:i:s.v\Z');
-    //         $payload->dateto = Carbon::today()->endOfDay()->format('Y-m-d\TH:i:s.v\Z');
-    //         $output = $this->api->getSales()->bySearch($payload);
-    //         print_r($output);
+    public function testSalesSearch()
+    {
+        try {
+            $payload = new SalesSearchPayload();
+            $payload->status = "Completed";
+            $payload->datefrom = Carbon::today()->format('Y-m-d\TH:i:s.v\Z');
+            $payload->dateto = Carbon::today()->endOfDay()->format('Y-m-d\TH:i:s.v\Z');
+            $output = $this->api->getSales()->bySearch($payload);
+            print_r($output);
 
-    //         $this->assertTrue(true);
-    //     } catch (\Exception $e) {
-    //         $output = $e->getMessage();
-    //         print_r($output);
-    //     }
-    // }
+            $this->assertTrue(true);
+        } catch (\Exception $e) {
+            $output = $e->getMessage();
+            print_r($output);
+        }
+    }
 
     // public function testCreateClient()
     // {
