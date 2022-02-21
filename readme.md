@@ -24,17 +24,18 @@ $xil->setToken("token");
 ```
 
 ## Client
-
+### Search by fields
 ```
-//Search by fields
 $payload = new \Trilobyte\Xilnex\Clients\ClientQueryPayload();
 $payload->email = "someone@email.com";
 $data = $xil->getClient()->byQuery($payload);
-
-//Get by ID
+```
+### Get By Id
+```
 $data = $xil->getClient()->byId(101);
-
-//Create User
+```
+### Create User
+```
 $body = new CreateUserBody();
 $body->name = "Test";
 $body->email = "test@test.com";
@@ -45,8 +46,27 @@ $body->dob = Carbon::createFromFormat("Y-m-d", "1989-02-13")->format('Y-m-d\TH:i
 $body->mobile = "60177777777";
 $body->category = "Personal"; //Fixed
 $body->createdOutlet = "E-Commerce"; //Fixed
-
 $output = $this->api->getClient()->create($body);
+```
+
+### Update User
+```
+//Must resend all or else will get replace with empty value
+$body = new CreateUserBody();
+$body->name = "Test";
+$body->email = "test@test.com";
+$body->type = "FREE"; //Depend on user membership. FREE | VIP | CORPORATE
+$body->group = "Retail"; //Fixed
+$body->gender = "male";
+$body->dob = Carbon::createFromFormat("Y-m-d", "1989-02-13")->format('Y-m-d\TH:i:s.v\Z');
+$body->mobile = "60177777777";
+$body->category = "Personal"; //Fixed
+$body->createdOutlet = "E-Commerce"; //Fixed
+
+//Update Only
+$body->enableDOB = true; //if DOB is not empty
+
+$output = $this->api->getClient()->update(9009, $body);
 ```
 ## Sales
 
